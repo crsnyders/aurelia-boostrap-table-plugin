@@ -1,5 +1,6 @@
 import {inject, bindable, customAttribute, BindingEngine, noView, DOM} from "aurelia-framework";
 import * as $ from "jquery";
+import "bootstrap-table";
 
 @customAttribute('bootstrap-table')
 @inject(DOM.Element, BindingEngine) // Inject the instance of this element
@@ -10,7 +11,8 @@ export class BootstrapTable {
   private SEARCH_SELECTOR: string = '.search input';
 
 
-  @bindable tableconfig: any;
+  @bindable tableconfig: BootstrapTableConfig;
+  private state: any;
   private instantiated: boolean = false;
   private bsTable: JQuery;
   private subscription: any;
@@ -29,25 +31,25 @@ export class BootstrapTable {
       .on('sort.bs.table', this.CONTAINER_SELECTOR + ' table', (evt, sortName, sortOrder) => {
 
         if (!this.bsTable) return;
-        var state = this.tableconfig.state;
-        state.sortName = sortName;
-        state.sortOrder = sortOrder;
+
+        this.state.sortName = sortName;
+        this.state.sortOrder = sortOrder;
       })
       .on('page-change.bs.table', this.CONTAINER_SELECTOR + ' table', (evt, pageNumber, pageSize) => {
         if (!this.bsTable) return;
-        var state = this.tableconfig.state;
-        state.pageNumber = pageNumber;
-        state.pageSize = pageSize;
+
+        this.state.pageNumber = pageNumber;
+        this.state.pageSize = pageSize;
       })
       .on('search.bs.table', this.CONTAINER_SELECTOR + ' table', (evt, searchText) => {
         if (!this.bsTable) return;
-        var state = this.tableconfig.state;
-        state.searchText = searchText;
+
+        this.state.searchText = searchText;
       })
       .on('focus blur', this.CONTAINER_SELECTOR + ' ' + this.SEARCH_SELECTOR, (evt) => {
         if (!this.bsTable) return;
-        var state = this.tableconfig.state;
-        state.searchHasFocus = $(evt.target).is(':focus');
+
+        this.state.searchHasFocus = $(evt.target).is(':focus');
       });
 
     $(window).resize(() => {
@@ -59,17 +61,16 @@ export class BootstrapTable {
     if (this.tableconfig) {
       this.subscription = this.bindingEngine.propertyObserver(this.tableconfig, 'state')
         .subscribe((newValue, oldValue) => {
-          let state;
-          if (!state) state = this.tableconfig.state = {};
+          if (!this.state) this.state= {};
           this.bsTable.trigger('directive-updated.bs.table', [state]);
         });
     }
 
-    if (!this.tableconfig.options) this.tableconfig.options = {};
-    var state = this.tableconfig.state || {};
+    if (!this.tableconfig) this.tableconfig = {};
+    var state = this.state || {};
 
     if (this.instantiated) this.bsTable.bootstrapTable('destroy');
-    this.bsTable.bootstrapTable(this.tableconfig.options);
+    this.bsTable.bootstrapTable(this.tableconfig);
     this.instantiated = true;
 
     // Update the UI for state that isn't settable via options
@@ -78,8 +79,7 @@ export class BootstrapTable {
   }
 
   onScroll() {
-    var state = this.tableconfig.state;
-    state.scroll = this.bsTable.bootstrapTable('getScrollPosition');
+    this.state.scroll = this.bsTable.bootstrapTable('getScrollPosition');
   }
 
   detached() {
@@ -87,8 +87,7 @@ export class BootstrapTable {
     (<any>this.subscription).dispose();
     this.bsTable.bootstrapTable('destroy');
   }
-
-  callMethod(methodName: string, params?: any) {
-    this.bsTable.bootstrapTable(methodName, params)
+  getTableInstance(): JQuery{
+    return this.bsTable;
   }
 }

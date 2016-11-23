@@ -1,0 +1,52 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "es5",
+    "module": "amd",
+    "declaration": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "dom"
+    ]
+  },
+  "filesGlob": [
+    "./src/**/*.ts",
+    "./test/**/*.ts",
+    "./typings/index.d.ts",
+    "./custom_typings/**/*.d.ts",
+    "./jspm_packages/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "jspm_packages"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  },
+  "files": [
+    "./src/aurelia-bootstrap-table.ts",
+    "./src/index.ts",
+    "./src/models/bootstrapTable.ts",
+    "./typings/index.d.ts",
+    "./custom_typings/bootstrap-table.d.ts",
+    "./jspm_packages/npm/aurelia-binding@1.0.0-beta.1.3.0/aurelia-binding.d.ts",
+    "./jspm_packages/npm/aurelia-dependency-injection@1.0.0-beta.1.2.0/aurelia-dependency-injection.d.ts",
+    "./jspm_packages/npm/aurelia-framework@1.0.0-beta.1.2.0/aurelia-framework.d.ts",
+    "./jspm_packages/npm/aurelia-loader@1.0.0-beta.1.2.0/aurelia-loader.d.ts",
+    "./jspm_packages/npm/aurelia-logging@1.0.0-beta.1.2.0/aurelia-logging.d.ts",
+    "./jspm_packages/npm/aurelia-metadata@1.0.0-beta.1.2.0/aurelia-metadata.d.ts",
+    "./jspm_packages/npm/aurelia-pal@1.0.0-beta.1.2.0/aurelia-pal.d.ts",
+    "./jspm_packages/npm/aurelia-path@1.0.0-beta.1.2.0/aurelia-path.d.ts",
+    "./jspm_packages/npm/aurelia-polyfills@1.0.0-beta.1.1.0/aurelia-polyfills.d.ts",
+    "./jspm_packages/npm/aurelia-task-queue@1.0.0-beta.1.2.0/aurelia-task-queue.d.ts",
+    "./jspm_packages/npm/aurelia-templating@1.0.0-beta.1.2.0/aurelia-templating.d.ts"
+  ]
+}
