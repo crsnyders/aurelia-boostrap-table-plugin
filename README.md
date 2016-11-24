@@ -1,8 +1,46 @@
-# aurelia-skeleton-plugin
+# aurelia-bootstrap-table-plugin
 
-This skeleton is based on [Aurelia Skeleton Plugin](https://github.com/aurelia/skeleton-plugin/). It sets up a standard aurelia plugin using gulp to build your TypeScript code. Karma/Jasmine testing is also configured.
+This plugin is a wrapper for [Bootstrap Table](http://bootstrap-table.wenzhixin.net.cn/)
 
-> To keep up to date on [Aurelia](http://www.aurelia.io/), please visit and subscribe to [the official blog](http://blog.durandal.io/). If you have questions, we invite you to [join us on Gitter](https://gitter.im/aurelia/discuss). If you would like to have deeper insight into our development process, please install the [ZenHub](https://zenhub.io) Chrome Extension and visit any of our repository's boards. You can get an overview of all Aurelia work by visiting [the framework board](https://github.com/aurelia/framework#boards).
+A simple aurelia attribute to allow you to load files into the browser, using the HTML5 FileReader functionality, also supports drag and drop.
+
+##Installing
+
+with jspm
+
+jspm install github:crsnyders/aurelia-boostrap-table-plugin
+
+then
+
+aurelia.use.plugin("crsnyders/aurelia-boostrap-table-plugin");
+
+## Using
+
+ ```shell
+  <table bootstrap-table="tableconfig.bind: config" class="bootstrap-table" bootstrap-table.ref="bsTablle">
+      </table>
+  ```
+
+  ```shell
+  <table bootstrap-table class="bootstrap-table">
+    <thead>
+      <th>4</th>
+      <th>6</th>
+      <th>7</th>
+      <th>9</th>
+      <th>0</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+        <td>5</td>
+      </tr>
+    </tbody>
+  </table>
+   ```
 
 ## Building The Code
 
